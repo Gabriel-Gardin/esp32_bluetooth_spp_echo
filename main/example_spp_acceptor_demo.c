@@ -80,6 +80,7 @@ static void esp_spp_cb(esp_spp_cb_event_t event, esp_spp_cb_param_t *param)
         ESP_LOGI(SPP_TAG, "ESP_SPP_DATA_IND_EVT len=%d handle=%d",
                  param->data_ind.len, param->data_ind.handle);
         esp_log_buffer_hex("",param->data_ind.data,param->data_ind.len);
+        esp_spp_write(param->open.handle, param->data_ind.len, param->data_ind.data);
 #else
         gettimeofday(&time_new, NULL);
         data_num += param->data_ind.len;
